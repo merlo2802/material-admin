@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { FullComponent } from './layouts/full/full.component';
+import { AppBlankComponent } from './layouts/blank/blank.component';
 
 export const AppRoutes: Routes = [
   {
@@ -22,5 +23,24 @@ export const AppRoutes: Routes = [
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
       }
     ]
+  },
+  {
+    path: '',
+    component: AppBlankComponent,
+    children: [
+      {
+        path: 'autenticacion',
+        loadChildren: () => import('./autenticacion/autenticacion.module').then(m => m.AutenticacionModule)
+      }
+    ]
+  },
+  // {
+  //   path: 'autenticacion',
+  //   component: AppBlankComponent,
+  //   loadChildren: () => import('./autenticacion/autenticacion.module').then(m => m.AutenticacionModule)
+  // },
+  {
+    path: '**',
+    redirectTo: 'authentication/404'
   }
 ];

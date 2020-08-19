@@ -17,11 +17,15 @@ import { DemoMaterialModule } from './demo-material-module';
 
 import { SharedModule } from './shared/shared.module';
 import { SpinnerComponent } from './shared/spinner.component';
+import { AppBlankComponent } from './layouts/blank/blank.component';
+import { AutenticacionModule } from './autenticacion/autenticacion.module';
+import { MaterialComponentsModule } from './material-component/material.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     FullComponent,
+    AppBlankComponent,
     AppHeaderComponent,
     SpinnerComponent,
     AppSidebarComponent
@@ -30,11 +34,13 @@ import { SpinnerComponent } from './shared/spinner.component';
     BrowserModule,
     BrowserAnimationsModule,
     DemoMaterialModule,
+    // AutenticacionModule,
+    // MaterialComponentsModule,
     FormsModule,
+    RouterModule.forRoot(AppRoutes, {useHash: true}),
     FlexLayoutModule,
     HttpClientModule,
     SharedModule,
-    RouterModule.forRoot(AppRoutes)
   ],
   providers: [
     {
