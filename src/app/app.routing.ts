@@ -16,29 +16,30 @@ export const AppRoutes: Routes = [
       {
         path: '',
         loadChildren:
+         () => import('./pages/pages.module').then(m => m.PagesModule)
+      },
+      {
+        path: '',
+        loadChildren:
           () => import('./material-component/material.module').then(m => m.MaterialComponentsModule)
       },
       {
         path: 'dashboard',
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
-      }
+      },
+
     ]
   },
   {
-    path: '',
+    path: 'autenticacion',
     component: AppBlankComponent,
     children: [
       {
-        path: 'autenticacion',
+        path: '',
         loadChildren: () => import('./autenticacion/autenticacion.module').then(m => m.AutenticacionModule)
       }
     ]
   },
-  // {
-  //   path: 'autenticacion',
-  //   component: AppBlankComponent,
-  //   loadChildren: () => import('./autenticacion/autenticacion.module').then(m => m.AutenticacionModule)
-  // },
   {
     path: '**',
     redirectTo: 'authentication/404'

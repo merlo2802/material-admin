@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import {HashLocationStrategy, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import { AppRoutes } from './app.routing';
 import { AppComponent } from './app.component';
 
@@ -18,9 +18,61 @@ import { DemoMaterialModule } from './demo-material-module';
 import { SharedModule } from './shared/shared.module';
 import { SpinnerComponent } from './shared/spinner.component';
 import { AppBlankComponent } from './layouts/blank/blank.component';
+import {NotifierModule, NotifierOptions} from 'angular-notifier';
 import { AutenticacionModule } from './autenticacion/autenticacion.module';
 import { MaterialComponentsModule } from './material-component/material.module';
+import { PagesModule } from './pages/pages.module';
 
+//firebase
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+//EndFirebase
+import { NgxSpinnerModule } from 'ngx-spinner';
+import {environment} from "../environments/environment";
+
+const customNotifierOptions: NotifierOptions = {
+  position: {
+    horizontal: {
+      position: 'right',
+      distance: 12
+    },
+    vertical: {
+      position: 'bottom',
+      distance: 12,
+      gap: 10
+    }
+  },
+  theme: 'material',
+  behaviour: {
+    autoHide: 5000,
+    onClick: 'hide',
+    onMouseover: 'pauseAutoHide',
+    showDismissButton: true,
+    stacking: 5
+  },
+  animations: {
+    enabled: true,
+    show: {
+      preset: 'slide',
+      speed: 300,
+      easing: 'ease'
+    },
+    hide: {
+      preset: 'fade',
+      speed: 300,
+      easing: 'ease',
+      offset: 50
+    },
+    shift: {
+      speed: 300,
+      easing: 'ease'
+    },
+    overlap: 150
+  }
+};
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,19 +86,26 @@ import { MaterialComponentsModule } from './material-component/material.module';
     BrowserModule,
     BrowserAnimationsModule,
     DemoMaterialModule,
-    // AutenticacionModule,
-    // MaterialComponentsModule,
     FormsModule,
+    NotifierModule.withConfig(customNotifierOptions),
     RouterModule.forRoot(AppRoutes, {useHash: true}),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule,
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFireDatabaseModule,
+    NgxSpinnerModule,
     FlexLayoutModule,
     HttpClientModule,
     SharedModule,
   ],
   providers: [
     {
-      provide: LocationStrategy,
-      useClass: PathLocationStrategy
-    }
+      provide: HashLocationStrategy,
+      useClass: PathLocationStrategy,
+
+    },
+    AngularFireDatabase,
   ],
   bootstrap: [AppComponent]
 })
