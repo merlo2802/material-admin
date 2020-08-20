@@ -13,7 +13,10 @@ $headingfont: 'Poppins', sans-serif;
 @import '~@angular/material/theming';
 
 /*Material Theme Colors*/
-
+$primary-theme:#82c5f5;
+$accent-theme:#5494D5;
+$warn-theme:#D68A2F;
+$success-theme: #4CAF50;
 $primary: mat-palette($mat-blue, 600);
 $accent: mat-palette($mat-indigo, 500);
 $warn: mat-palette($mat-pink, 500);
@@ -102,3 +105,6 @@ $card-brd: #d7dfe3;
 $dark-text: #848a96;
 $radius: 4px;
 $form-brd: #d9d9d9;
+//variables personales
+$color-fondo-clicPage: #ffffff;
+$black: #000000;

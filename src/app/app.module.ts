@@ -19,9 +19,6 @@ import { SharedModule } from './shared/shared.module';
 import { SpinnerComponent } from './shared/spinner.component';
 import { AppBlankComponent } from './layouts/blank/blank.component';
 import {NotifierModule, NotifierOptions} from 'angular-notifier';
-import { AutenticacionModule } from './autenticacion/autenticacion.module';
-import { MaterialComponentsModule } from './material-component/material.module';
-import { PagesModule } from './pages/pages.module';
 
 //firebase
 import { AngularFireModule } from '@angular/fire';

@@ -1,14 +1,13 @@
-<clic-page [title]="'Listado de Empresas'" (reloadEmitter)="this.ngOnInit()">
+<clic-page [title]="'Listado de Rubros'" (reloadEmitter)="this.ngOnInit()">
   <div id="products" class="page-layout carded fullwidth inner-scroll">
-
     <!-- TOP BACKGROUND -->
-    <div class="top-bg accent"></div>
+    <div class="top-bg"></div>
     <!-- / TOP BACKGROUND -->
     <!-- CENTER -->
     <div class="center">
 
       <!-- HEADER -->
-      <div class="header accent"
+      <div class="header"
            fxLayout="column" fxLayoutAlign="center center"
            fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="space-between center">
 
@@ -18,9 +17,9 @@
           <mat-icon class="logo-icon s-32 mr-16" >
             shopping_basket
           </mat-icon>
-          <span class="logo-text h1">
-                      Products
-                  </span>
+          <span class="text-white h1">
+            Rubros
+          </span>
         </div>
         <!-- / APP TITLE -->
 
@@ -36,7 +35,7 @@
         <!-- ADD BUTTON -->
         <button mat-raised-button
                 [routerLink]="'/apps/e-commerce/products/new'"
-                class="add-product-button fuse-white mt-24 mt-md-0">
+                class="add-button text-black mt-24 mt-md-0">
           <span>ADD NEW PRODUCT</span>
         </button>
         <!-- / ADD BUTTON -->
