@@ -19,6 +19,7 @@ import { SharedModule } from './shared/shared.module';
 import { SpinnerComponent } from './shared/spinner.component';
 import { AppBlankComponent } from './layouts/blank/blank.component';
 import {NotifierModule, NotifierOptions} from 'angular-notifier';
+import { MatDialog } from '@angular/material/dialog';
 
 //firebase
 import { AngularFireModule } from '@angular/fire';
@@ -103,6 +104,7 @@ const customNotifierOptions: NotifierOptions = {
 
     },
     AngularFireDatabase,
+    MatDialog
   ],
   bootstrap: [AppComponent]
 })

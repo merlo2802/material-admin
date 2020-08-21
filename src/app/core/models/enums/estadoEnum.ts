@@ -6,7 +6,7 @@
  */
 
 export enum EstadoEnum {
-  ACTIVO= "activo",
-  ELIMINADO = "eliminado",
-  INACTIVO = "inactivo",
+  ACTIVO= "ACTIVO",
+  ELIMINADO = "ELIMINADO",
+  INACTIVO = "INACTIVO",
 }

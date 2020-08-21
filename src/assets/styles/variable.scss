@@ -13,13 +13,15 @@ $headingfont: 'Poppins', sans-serif;
 @import '~@angular/material/theming';
 
 /*Material Theme Colors*/
-$primary-theme:#82c5f5;
+$primary-theme:#1F88E5;
 $accent-theme:#5494D5;
 $warn-theme:#D68A2F;
 $success-theme: #4CAF50;
 $primary: mat-palette($mat-blue, 600);
 $accent: mat-palette($mat-indigo, 500);
 $warn: mat-palette($mat-pink, 500);
+$cancel: #26C6DA;
+$save: #1F88E5;
 $theme: mat-light-theme($primary, $accent, $warn);
 $background: map-get($theme, background);
 $foreground: map-get($theme, foreground);

@@ -27,16 +27,16 @@
         <div class="search-wrapper mx-32 mx-md-0">
           <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
             <mat-icon>search</mat-icon>
-            <input #filter placeholder="Search for a product">
+            <input #filter placeholder="Buscar por rubros">
           </div>
         </div>
         <!-- / SEARCH -->
 
         <!-- ADD BUTTON -->
         <button mat-raised-button
-                [routerLink]="'/apps/e-commerce/products/new'"
+                (click)="abrirDialogo()"
                 class="add-button text-black mt-24 mt-md-0">
-          <span>ADD NEW PRODUCT</span>
+          <span>NUEVO RUBRO</span>
         </button>
         <!-- / ADD BUTTON -->
 

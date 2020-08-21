@@ -7,6 +7,7 @@ import {PageService} from "../../core/services/page.service";
 import {CustomOptions} from "../../core/dto/custom-options";
 import {Page} from "../../core/utils/paginator/page";
 import { NotifierService } from 'angular-notifier';
+import {DialogoCrearEditarRubroComponent} from "./dialogo-crear-editar-rubro/dialogo-crear-editar-rubro.component";
 
 export interface PeriodicElement {
   name: string;
@@ -58,15 +59,15 @@ export class RubroComponent extends ClicComponent implements OnInit {
     })
   }
 
-  // abrirDialogo(){
-  //   const temporal = ""
-  //   const dialog = this.matDialog.open(DialogoCrearEditarRubroComponent, {
-  //     width: '650px',
-  //     minWidth: '650px',
-  //     panelClass: ['zero-padding', 'scroll-x-hidden'],
-  //     data: temporal
-  //   });
-  // }
+  abrirDialogo(){
+    const temporal = ""
+    const dialog = this.matDialog.open(DialogoCrearEditarRubroComponent, {
+      width: '550px',
+      minWidth: '550px',
+      panelClass: ['zero-padding', 'scroll-x-hidden'],
+      data: temporal
+    });
+  }
 
 
   notifierError(error: any, type?: string) {

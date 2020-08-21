@@ -1,0 +1,61 @@
+<mat-card>
+    <mat-card-header class="bg-primary-theme text-white">
+      <mat-card-title>
+             Nuevo rubro
+      </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+      <div [formGroup]="form">
+          <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+              <mat-form-field fxFlex="100">
+                  <input matInput formControlName="nombre" placeholder="Nombre" maxlength="5">
+<!--                  <mat-hint align="end">{{this.form.get('nombre').value? this.form.get('nombre').value.length:0}} / 5</mat-hint>-->
+<!--                  <mat-error *ngIf="this.form.get('nombre').hasError('required') && this.form.get('nombre').touched" class="text-danger font-11">Este campo es <strong>requerido</strong>.</mat-error>-->
+<!--                  <mat-error *ngIf="this.form.get('nombre').hasError('maxlength') && this.form.get('nombre').touched" class="text-danger font-11">Sólo se permite <strong>5 caracteres</strong>.-->
+<!--                  </mat-error>-->
+<!--                  <mat-error *ngIf="this.form.get('nombre').hasError('minlength') && this.form.get('nombre').touched" class="text-danger font-11">Se requiere al menos <strong>2 caracteres</strong>.-->
+<!--                  </mat-error>-->
+              </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+              <mat-form-field fxFlex="100">
+                  <input matInput formControlName="descripcion" placeholder="Descripción" maxlength="50">
+<!--                  <mat-hint align="end">{{this.form.get('descripcion').value? this.form.get('descripcion').value.length:0}} / 50</mat-hint>-->
+<!--                  <mat-error *ngIf="this.form.get('descripcion').hasError('required') && this.form.get('descripcion').touched" class="text-danger font-11">Este campo es <strong>requerido</strong>.</mat-error>-->
+<!--                  <mat-error *ngIf="this.form.get('descripcion').hasError('maxlength') && this.form.get('descripcion').touched" class="text-danger font-11">Sólo se permite <strong>50 caracteres</strong>.-->
+<!--                  </mat-error>-->
+<!--                  <mat-error *ngIf="this.form.get('descripcion').hasError('minlength') && this.form.get('descripcion').touched" class="text-danger font-11">Se requiere al menos <strong>5 caracteres</strong>.-->
+<!--                  </mat-error>-->
+              </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+            <mat-form-field>
+              <mat-select placeholder="Estado del Rubro" formControlName="estado">
+                <mat-option *ngFor="let item of this.listaEstado" [value]="item">
+                  {{item}}
+                </mat-option>
+              </mat-select>
+<!--              <mat-error *ngIf="this.form.hasError('required', ['enterprise']) && this.form.get('enterprise').touched">Este campo es <strong>requerido</strong>.</mat-error>-->
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+            <div fxFlex="100">
+              <div class="custom-dropzone" ngx-dropzone [accept]="'image/*'" (change)="onSelect($event)">
+                <ngx-dropzone-label>
+                  <div>
+                    <h2>Seleccionar imagen de rubro</h2>
+                  </div>
+                </ngx-dropzone-label>
+                <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor='let f of this.files' [file]='f' [removable]="true" (removed)="onRemove(f)">
+                  <ngx-dropzone-label></ngx-dropzone-label>
+                </ngx-dropzone-image-preview>
+              </div>
+            </div>
+          </div>
+      </div>
+      <mat-card-actions fxLayoutAlign="end center" fxLayoutGap="5px">
+          <button mat-flat-button color="primary" type="button"  (click)="this.save()">Guardar</button>
+          <button mat-stroked-button color="accent" type="button" (click)="this.cancel()">Cancelar</button>
+      </mat-card-actions>
+  </mat-card-content>
+</mat-card>

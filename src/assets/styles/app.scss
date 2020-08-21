@@ -585,6 +585,15 @@ html body {
 Background Colors
 *******************/
 
+.bg-primary-theme {
+  background-color: $primary-theme;
+}
+
+.bg-accent-theme {
+  background-color: $accent-theme;
+}
+
+
 .bg-primary {
     background-color: $primary !important;
 }
