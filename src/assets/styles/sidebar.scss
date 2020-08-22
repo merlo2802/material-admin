@@ -21,7 +21,7 @@ mat-sidenav {
         &:hover{
             background: none;
         }
-        
+
         .mat-list-item-content{
             display: block;
             padding: 0px 15px;
@@ -35,7 +35,7 @@ mat-sidenav {
                 }
             }
         }
-        
+
         a{
             height: 45px;
             padding: 0 0px;
@@ -63,7 +63,7 @@ mat-sidenav {
             background: none;
             border-radius: $radius;
             color:$sidebar-selected;
-            
+
             mat-icon{
                 color:$sidebar-selected;
             }
@@ -71,22 +71,22 @@ mat-sidenav {
                 -webkit-transform: rotate(-180deg);
                 transform: rotate(-180deg);
             }
-            
+
         }
         &.selected .sub-item .mat-list-item-content a.selected{
             background: transparent;
             color:$inverse;
-            font-weight: 500;               
+            font-weight: 500;
         }
     }
     .panel-menu {
         background-color: $sidebar;
     }
 
-    //expancion panel 
+    //expancion panel
     .mat-expansion-panel-header{
         margin-top: 0px;
- 
+
         height: auto;
         padding-left: 15px;
         &:hover{
@@ -95,7 +95,7 @@ mat-sidenav {
                 color: $sidebar-hover;
            }
         }
-        
+
         .item-title{
             display: block;
             padding: 0px 0px;
@@ -103,14 +103,14 @@ mat-sidenav {
             &:hover{
                 background: none;
                 > a{
-                  color: $sidebar-hover;
+                  color: $sidebar-hover-modulo-text;
                   mat-icon {
-                        color: $sidebar-hover;
+                        color: $sidebar-hover-modulo-text;
                     }
                 }
             }
         }
-        
+
         .item-title{
             a{
                 height: 45px;
@@ -142,7 +142,7 @@ mat-sidenav {
                 a{
                     border-radius: $radius;
                     color: $sidebar-selected;
-                    
+
                     mat-icon{
                         color: $sidebar-selected;
                     }
@@ -151,17 +151,17 @@ mat-sidenav {
                         transform: rotate(-180deg);
                         color: $sidebar-selected;
                     }
-                    
+
                 }
             }
             .mat-expansion-indicator::after {
                 color: $sidebar-selected;
            }
-        } 
+        }
         &.selected > .item-title > a.selected{
             background: transparent;
             color:$inverse;
-            font-weight: 500;               
+            font-weight: 500;
         }
         .mat-expansion-indicator::after {
              color: $sidebar-icons;
@@ -190,10 +190,10 @@ mat-sidenav {
 use profile section
 ******************/
 
-.user-profile {  
+.user-profile {
     position: relative;
     background-size:cover;
-    
+
     .profile-img {
         width: 50px;
         margin-left: 30px;
@@ -275,7 +275,7 @@ use profile section
             }
         }
     }
-    
+
 }
 
 
