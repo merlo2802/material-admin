@@ -10,23 +10,26 @@ import { NotifierService } from 'angular-notifier';
 import {DialogoCrearEditarRubroComponent} from "./dialogo-crear-editar-rubro/dialogo-crear-editar-rubro.component";
 
 export interface PeriodicElement {
+  actions?: any;
   name: string;
   position: number;
+  image: string;
   weight: number;
   symbol: string;
+  active: boolean;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
+  {position: 1,image:'assets/test/reaching.jpg', name: 'Hydrogen', weight: 1.0079, symbol: 'H', active: true},
+  {position: 2,image:'assets/test/reaching.jpg', name: 'Helium', weight: 4.0026, symbol: 'He', active: true},
+  {position: 3,image:'assets/test/reaching.jpg', name: 'Lithium', weight: 6.941, symbol: 'Li', active: false},
+  {position: 4,image:'assets/test/reaching.jpg', name: 'Beryllium', weight: 9.0122, symbol: 'Be', active: true},
+  {position: 5,image:'assets/test/reaching.jpg', name: 'Boron', weight: 10.811, symbol: 'B', active: false},
+  {position: 6,image:'assets/test/reaching.jpg', name: 'Carbon', weight: 12.0107, symbol: 'C', active: false},
+  {position: 7,image:'assets/test/reaching.jpg', name: 'Nitrogen', weight: 14.0067, symbol: 'N', active: true},
+  {position: 8,image:'assets/test/reaching.jpg', name: 'Oxygen', weight: 15.9994, symbol: 'O', active: false},
+  {position: 9,image:'assets/test/reaching.jpg', name: 'Fluorine', weight: 18.9984, symbol: 'F', active: true},
+  {position: 10,image:'assets/test/reaching.jpg', name: 'Neon', weight: 20.1797, symbol: 'Ne', active: false},
 ];
 
 @Component({
@@ -35,7 +38,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./rubro.component.scss']
 })
 export class RubroComponent extends ClicComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = ['actions','position','image', 'name', 'weight', 'symbol','active'];
   dataSource = ELEMENT_DATA;
   rubro: RubroModel = new RubroModel();
 
@@ -59,6 +62,10 @@ export class RubroComponent extends ClicComponent implements OnInit {
     })
   }
 
+  editar(evento: any)
+  {
+    console.log("llega", evento)
+  }
   abrirDialogo(){
     const temporal = ""
     const dialog = this.matDialog.open(DialogoCrearEditarRubroComponent, {

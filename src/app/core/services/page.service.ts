@@ -6,6 +6,7 @@ import {environment} from "../../../environments/environment";
 import {FileI} from "../models/interfaces/file.interface";
 import {Observable} from "rxjs";
 import {AngularFireStorage} from "@angular/fire/storage";
+import {AngularFirestore} from "@angular/fire/firestore";
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,7 @@ export class PageService {
   constructor(
     private http:HttpClient,
     private storage: AngularFireStorage,
+    private fs: AngularFirestore,
   ) { }
 
   GuardarRubro(rubro: RubroModel) {
@@ -51,6 +53,28 @@ export class PageService {
       })
     )
   }
+
+
+
+  //RUBROS
+
+
+  nuevoRubro(record : any) {
+    return this.fs.collection('rubros').add(record);
+  }
+
+  listarRubros() {
+    return this.fs.collection('rubros').snapshotChanges();
+  }
+
+
+  // update_Student(recordID,record){
+  //   this.fs.doc('Students/' + recordID).update(record);
+  // }
+  //
+  // delete_Student(record_id) {
+  //   this.fs.doc('Students/' + record_id).delete();
+  // }
 
 
 }
