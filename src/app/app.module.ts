@@ -96,6 +96,7 @@ const customNotifierOptions: NotifierOptions = {
     FlexLayoutModule,
     HttpClientModule,
     SharedModule,
+   
   ],
   providers: [
     {
