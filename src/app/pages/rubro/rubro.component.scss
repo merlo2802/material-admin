@@ -1,6 +1,13 @@
 @import '~assets/styles/fuse';
 
   #products {
+    mat-header-cell,mat-cell{
+      text-align: center;
+      justify-content: center;
+      .id{
+        width: 50px;
+      }
+    }
     .top-bg {
       background-color: $color-header-page;
       @include media-breakpoint('lt-md') {
@@ -131,5 +138,10 @@
       border-radius: 50%;
     }
   }
+
+.content-card {
+  border-radius: 8px 8px 0 0;
+}
+
 
 

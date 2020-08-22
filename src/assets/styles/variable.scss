@@ -12,16 +12,21 @@ $headingfont: 'Poppins', sans-serif;
 
 @import '~@angular/material/theming';
 
+
 /*Material Theme Colors*/
-$primary-theme:#1F88E5;
+$custom: ( 100: #79336E, 200: #8B3B82, 300: #FAB029, contrast: ( 100: $light-primary-text, 200: $light-primary-text, 300: $light-primary-text, ));
+$primary-theme:#79336E;
 $accent-theme:#5494D5;
 $warn-theme:#D68A2F;
 $success-theme: #4CAF50;
-$primary: mat-palette($mat-blue, 600);
-$accent: mat-palette($mat-indigo, 500);
-$warn: mat-palette($mat-pink, 500);
-$cancel: #26C6DA;
-$save: #1F88E5;
+//$primary: mat-palette($mat-blue, 600);
+//$accent: mat-palette($mat-indigo, 500);
+//$warn: mat-palette($mat-pink, 500);
+$primary: mat-palette($custom, 100);
+$accent: mat-palette($custom, 200);
+$warn: mat-palette($custom, 300);
+$cancel: #FAB029;
+$save: #8B3B82;
 $theme: mat-light-theme($primary, $accent, $warn);
 $background: map-get($theme, background);
 $foreground: map-get($theme, foreground);
@@ -42,7 +47,7 @@ $custom-typography: mat-typography-config(
 
 /*Theme Colors*/
 
-$topbar: #2196f3;
+$topbar: #79336E;
 $sidebar: #fff;
 $sidebar-white: #e5edef;
 $sidebar-alt: #f2f6f8;
@@ -55,8 +60,8 @@ $sidebar-icons: #99abb4;
 $font-16: 16px;
 
 $light-text: #a6b7bf;
-$themecolor: #1e88e5;
-$themecolor-alt: #26c6da;
+$themecolor: #79336E;
+$themecolor-alt: #FAB029;
 $themecolor-dark: #028ee1;
 
 /*bootstrap Color*/

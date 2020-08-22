@@ -47,10 +47,30 @@
       <div class="content-card">
 
         <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <!--buttons-->
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <button mat-icon-button matTooltip="Actualizar Rubro" (click)="this.editar(element)"><mat-icon fxLayoutAlign="start start" color="warn" >edit</mat-icon></button>
+              <button mat-icon-button matTooltip="Eliminar Rubro" (click)="this.editar(element)"><mat-icon fxLayoutAlign="start start" color="warn" >delete</mat-icon></button>
+            </mat-cell>
+          </ng-container>
           <!-- Position Column -->
           <ng-container matColumnDef="position">
             <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+          </ng-container>
+
+          <!-- Image Column -->
+          <ng-container  matColumnDef="image">
+            <mat-header-cell *matHeaderCellDef>Imagen</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <img style="min-width: 200px"
+                   *ngIf="element.featuredImageId" [alt]="element.name"
+                   [src]="element.images[element.featuredImageId].url"/>
+              <img *ngIf="!element.featuredImageId"
+                   [src]="'../../../assets/images/test/reaching.jpg'">
+            </mat-cell>
           </ng-container>
 
           <!-- Name Column -->
@@ -69,6 +89,14 @@
           <ng-container matColumnDef="symbol">
             <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="active">
+            <mat-header-cell *matHeaderCellDef>Active</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <mat-icon *ngIf="element.active" class="active-icon green-600 s-16" >create</mat-icon>
+              <mat-icon *ngIf="!element.active" class="active-icon red-500 s-16" >create</mat-icon>
+            </mat-cell>
           </ng-container>
 
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
