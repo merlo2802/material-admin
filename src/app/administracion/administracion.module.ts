@@ -2,7 +2,7 @@ import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RubroComponent } from './rubro/rubro.component';
 import { RouterModule } from '@angular/router';
-import {PagesRoutes} from './pages.routing';
+import { AdministracionRoutes } from './administracion.routing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -32,7 +32,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     ReactiveFormsModule,
     FlexLayoutModule,
     CdkTableModule,
-    RouterModule.forChild(PagesRoutes),
+    RouterModule.forChild(AdministracionRoutes),
     SharedModule,
     NgxDatatableModule,
     LayoutModule,
@@ -42,4 +42,4 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
   entryComponents: [],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
 })
-export class PagesModule { }
+export class AdministracionModule { }

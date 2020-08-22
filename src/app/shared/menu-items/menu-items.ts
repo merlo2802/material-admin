@@ -16,23 +16,23 @@ export interface Menu {
 }
 
 const MENUITEMS: Menu[] = [
-  { urlModulo: 'seguridad', nombre: 'Seguridad', tipo: 'link', icono: 'dns', inverseModulo:[
+  { urlModulo: 'seguridad', nombre: 'Seguridad', tipo: 'modulo', icono: 'dns', inverseModulo:[
       
   ]},
-  { urlModulo: 'administracion', nombre: 'Administración', tipo: 'link', icono: 'dns', inverseModulo:[
-    {urlModulo: 'rubro', nombre: 'Rubros', tipo: 'link', icono: 'dns', inverseModulo:[]},
-    {urlModulo: 'categoria', nombre: 'Categorías', tipo: 'link', icono: 'dns', inverseModulo:[]},
-    {urlModulo: 'Item', nombre: 'Items', tipo: 'link', icono: 'dns', inverseModulo:[]},
+  { urlModulo: 'administracion', nombre: 'Administración', tipo: 'modulo', icono: 'dns', inverseModulo:[
+    {urlModulo: 'rubro', nombre: 'Rubros', tipo: 'submodulo', icono: 'dns', inverseModulo:[]},
+    {urlModulo: 'categoria', nombre: 'Categorías', tipo: 'submodulo', icono: 'dns', inverseModulo:[]},
+    {urlModulo: 'item', nombre: 'Items', tipo: 'submodulo', icono: 'dns', inverseModulo:[]},
   ]},
-  { urlModulo: 'promociones', nombre: 'Promoción', tipo: 'link', icono: 'dns', inverseModulo:[
+  { urlModulo: 'promociones', nombre: 'Promoción', tipo: 'modulo', icono: 'dns', inverseModulo:[
     
   ]},
-  { urlModulo: 'usuarios-moviles', nombre: 'Usuarios Móviles', tipo: 'link', icono: 'dns', inverseModulo:[
+  { urlModulo: 'usuarios-moviles', nombre: 'Usuarios Móviles', tipo: 'modulo', icono: 'dns', inverseModulo:[
     
   ]},
-  { urlModulo: 'configuracion', nombre: 'Configuración', tipo: 'link', icono: 'dns', inverseModulo:[
-    {urlModulo: 'paises', nombre: 'Países', tipo: 'link', icono: 'dns', inverseModulo:[]},
-    {urlModulo: 'ciudades', nombre: 'Ciudades', tipo: 'link', icono: 'dns', inverseModulo:[]},
+  { urlModulo: 'configuracion', nombre: 'Configuración', tipo: 'modulo', icono: 'dns', inverseModulo:[
+    {urlModulo: 'paises', nombre: 'Países', tipo: 'submodulo', icono: 'dns', inverseModulo:[]},
+    {urlModulo: 'ciudades', nombre: 'Ciudades', tipo: 'submodulo', icono: 'dns', inverseModulo:[]},
   ]},
 ];
 

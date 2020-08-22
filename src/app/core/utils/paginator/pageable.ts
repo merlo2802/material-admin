@@ -9,11 +9,11 @@ import {Sort} from './sort';
 
 
 export class Pageable {
-  sort: Sort;
-  pageSize: number;
-  pageNumber: number;
-  offset: number;
-  paged: boolean;
-  unpaged: boolean;
+  sort: Sort | undefined;
+  pageSize: number | undefined;
+  pageNumber: number | undefined;
+  offset: number | undefined;
+  paged: boolean | undefined;
+  unpaged: boolean | undefined;
   constructor() {}
 }

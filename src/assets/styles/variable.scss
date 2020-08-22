@@ -40,17 +40,28 @@ $custom-typography: mat-typography-config(
 
 // Dark Theme
 
-/*Theme Colors*/
-
+/*color de texto*/
+$bodytext: #67757c;
+////// VARIABLES PARA EL SIDEBAR ///////
+/*Colores de toobar y sidebar*/
 $topbar: #2196f3;
 $sidebar: #fff;
 $sidebar-white: #e5edef;
 $sidebar-alt: #f2f6f8;
-$bodycolor: #eef5f9;
 $headingtext: #455a64;
-$bodytext: #67757c;
 $sidebar-text: #607d8b;
 $sidebar-icons: #99abb4;
+$sidebar-hover: #64B5F6;
+$sidebar-selected: #64B5F6;
+$sidebar-hover-modulo: #2196f3;
+//***************************************//
+
+
+
+$sidebar-white: #e5edef;
+$sidebar-alt: #f2f6f8;
+$bodycolor: #eef5f9;
+$headingtext: #455a64;
 
 $font-16: 16px;
 

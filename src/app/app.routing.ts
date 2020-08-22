@@ -14,14 +14,19 @@ export const AppRoutes: Routes = [
         pathMatch: 'full'
       },
       {
-        path: '',
+        path: 'administracion',
         loadChildren:
-         () => import('./pages/pages.module').then(m => m.PagesModule)
+         () => import('./administracion/administracion.module').then(m => m.AdministracionModule)
       },
       {
-        path: '',
+        path: 'seguridad',
         loadChildren:
-          () => import('./material-component/material.module').then(m => m.MaterialComponentsModule)
+         () => import('./seguridad/seguridad.module').then(s => s.SeguridadModule)
+      },
+      {
+        path: 'configuracion',
+        loadChildren:
+         () => import('./configuracion/configuracion.module').then(c => c.ConfiguracionModule)
       },
       {
         path: 'dashboard',

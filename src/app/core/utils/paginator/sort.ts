@@ -7,8 +7,8 @@
  **/
 
 export class Sort {
-  sorted: boolean;
-  unsorted: boolean;
-  empty: boolean;
+  sorted: boolean | undefined;
+  unsorted: boolean | undefined;
+  empty: boolean | undefined;
   constructor() {}
 }

@@ -15,7 +15,8 @@ mat-sidenav {
 }
 #snav{
     box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.08);
-    .mat-list-item {
+    background-color: $sidebar;
+    .mat-list-item{
         height: auto;
         &:hover{
             background: none;
@@ -27,15 +28,18 @@ mat-sidenav {
             &:hover{
                 background: none;
                 > a{
-                  color:$themecolor;
+                  color: $sidebar-hover;
+                  mat-icon {
+                        color: $sidebar-hover;
+                    }
                 }
             }
         }
         
         a{
             height: 45px;
-            padding: 0 10px;
-            margin-bottom: 10px;
+            padding: 0 0px;
+            margin-bottom: 0px;
             align-items: center;
             display: flex;
             font-size: 15px;
@@ -56,12 +60,12 @@ mat-sidenav {
             }
         }
         &.selected > .mat-list-item-content > a{
-            background: $themecolor-alt;
+            background: none;
             border-radius: $radius;
-            color:$white;
+            color:$sidebar-selected;
             
             mat-icon{
-                color:$white;
+                color:$sidebar-selected;
             }
             .dd-icon{
                 -webkit-transform: rotate(-180deg);
@@ -75,7 +79,113 @@ mat-sidenav {
             font-weight: 500;               
         }
     }
+    .panel-menu {
+        background-color: $sidebar;
+    }
+
+    //expancion panel 
+    .mat-expansion-panel-header{
+        margin-top: 0px;
+ 
+        height: auto;
+        padding-left: 15px;
+        &:hover{
+            background: $sidebar-hover-modulo;
+            .mat-expansion-indicator::after {
+                color: $sidebar-hover;
+           }
+        }
+        
+        .item-title{
+            display: block;
+            padding: 0px 0px;
+            margin-left: 0px;
+            &:hover{
+                background: none;
+                > a{
+                  color: $sidebar-hover;
+                  mat-icon {
+                        color: $sidebar-hover;
+                    }
+                }
+            }
+        }
+        
+        .item-title{
+            a{
+                height: 45px;
+                padding: 0 0px;
+                margin-bottom: 10px;
+                align-items: center;
+                display: flex;
+                font-size: 15px;
+                white-space: nowrap;
+                color:$sidebar-text;
+                mat-icon:not(.dd-icon){
+                    margin-right: 0px;
+                }
+                mat-icon{
+                    color:$sidebar-icons;
+                }
+                .dd-icon{
+                    font-size: 16px;
+                    width: 16px;
+                    transition: 0.2s ease-in;
+                    margin: 5px 0 5px 5px;
+                    height: 16px;
+                }
+            }
+        }
+        &.mat-expanded{
+            background: none;
+            .item-title{
+                a{
+                    border-radius: $radius;
+                    color: $sidebar-selected;
+                    
+                    mat-icon{
+                        color: $sidebar-selected;
+                    }
+                    .icono{
+                        -webkit-transform: rotate(-180deg);
+                        transform: rotate(-180deg);
+                        color: $sidebar-selected;
+                    }
+                    
+                }
+            }
+            .mat-expansion-indicator::after {
+                color: $sidebar-selected;
+           }
+        } 
+        &.selected > .item-title > a.selected{
+            background: transparent;
+            color:$inverse;
+            font-weight: 500;               
+        }
+        .mat-expansion-indicator::after {
+             color: $sidebar-icons;
+        }
+    }
 }
+
+/*****************
+    Barra de scroll
+******************/
+.mat-drawer-inner-container {
+    overflow: unset !important;
+}
+.scroll::-webkit-scrollbar {
+	width: 8px;     /* Tamaño del scroll en vertical */
+	height: 8px;    /* Tamaño del scroll en horizontal */
+	display: block;  /* Ocultar scroll */
+}
+
+.scroll::-webkit-scrollbar-thumb {
+	background: $sidebar-text;
+	border-radius: 4px;
+}
+
 /*******************
 use profile section
 ******************/
