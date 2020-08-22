@@ -21,16 +21,27 @@
     </mat-menu>
 
 </div>
-<mat-nav-list appAccordion>
-    <mat-list-item appAccordionLink *ngFor="let menuitem of menuItems.getMenuitem()" routerLinkActive="selected" group="{{menuitem.state}}">
-        <a class="" appAccordionToggle [routerLink]="['/', menuitem.state]" *ngIf="menuitem.type === 'link'">
-            <mat-icon>{{ menuitem.icon }}</mat-icon>
-            <span>{{ menuitem.name }}</span>
-            <span fxFlex></span>
-            <span class="label label-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span>
-        </a>
 
+<mat-accordion>
+    <mat-expansion-panel class="panel-menu" *ngFor="let menuItem of menuItems.getMenuitem()">
+        <mat-expansion-panel-header>
+            <mat-panel-title class="item-title">
+                <a class="" *ngIf="menuItem.tipo === 'modulo'" (click)="this.activar()" >
+                    <mat-icon>{{ menuItem.icono }}</mat-icon> 
+                    <span>{{ menuItem.nombre }}</span> 
+                    <span fxFlex></span> 
+                </a>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-nav-list class="">
+            <mat-list-item  *ngFor="let subMenu of menuItem.inverseModulo" routerLinkActive="selected">
+                <a class="" [routerLink]="['/',menuItem.urlModulo, subMenu.urlModulo]" *ngIf="subMenu.tipo === 'submodulo'">
+                    <mat-icon>{{ subMenu.icono }}</mat-icon> 
+                    <span>{{ subMenu.nombre }}</span> 
+                    <span fxFlex></span> 
+                </a>
+            </mat-list-item>
+        </mat-nav-list>
+    </mat-expansion-panel>
+</mat-accordion>
 
-    </mat-list-item>
-
-</mat-nav-list>
