@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { RubroModel } from '../models/rubro.model';
+import {RubroModel} from '../models/rubro.model';
 import {finalize, map} from 'rxjs/operators';
 import {environment} from "../../../environments/environment";
 import {FileI} from "../models/interfaces/file.interface";
@@ -14,10 +14,11 @@ import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/firest
 })
 export class PageService {
   //imagenes en firebase storage
-  private filepath :any ;
+  private filePath :any ;
   private downloadUrl: Observable<string>
   private url = environment.apiUrl;
   public rubroCollection : AngularFirestoreCollection<RubroModel>;
+
   constructor(
     private http:HttpClient,
     private storage: AngularFireStorage,
@@ -26,25 +27,25 @@ export class PageService {
     this.rubroCollection =   fs.collection<RubroModel>('rubros');
   }
 
-  GuardarRubro(rubro: RubroModel) {
-    return this.http.post(`${this.url}/rubros.json`, rubro)
-      .pipe(
-        map((resp: any) => {
-          rubro.id = resp.name;
-          return rubro;
-        })
-      );
-  }
+  // GuardarRubro(rubro: RubroModel) {
+  //   return this.http.post(`${this.url}/rubros.json`, rubro)
+  //     .pipe(
+  //       map((resp: any) => {
+  //         rubro.id = resp.name;
+  //         return rubro;
+  //       })
+  //     );
+  // }
 
-  actualizarRubro(rubro: RubroModel){
-    return this.http.put(`${this.url}/rubro/${rubro.id}.json`, rubro)
-  }
+  // actualizarRubro(rubro: RubroModel){
+  //   return this.http.put(`${this.url}/rubro/${rubro.id}.json`, rubro)
+  // }
 
 
   private subirImagen(rubro:RubroModel, imagen:FileI ){
-    this.filepath = `imagenes/rubros/${imagen.name}`;
-    const fileRef = this.storage.ref(this.filepath);
-    const task = this.storage.upload(this.filepath, imagen);
+    this.filePath = `imagenes/rubros/${imagen.name}`;
+    const fileRef = this.storage.ref(this.filePath);
+    const task = this.storage.upload(this.filePath, imagen);
     task.snapshotChanges()
     .pipe(
       finalize(() => {
@@ -52,20 +53,32 @@ export class PageService {
           this.downloadUrl = urlImagen;
           console.log('url_image', urlImagen);
           console.log('url_post', rubro);
-          //llamar al metodo a guardar
+          this.guardarRubro(rubro);
         })
       })
     )
   }
 
+  public preAddAndUpdatePost(rubro: RubroModel, image: FileI): void {
+    this.subirImagen(rubro, image);
+  }
 
+  private guardarRubro(rubro: RubroModel) {
+    const rubroObj =  {
+      descripcion: rubro.descripcion,
+      estado: rubro.estado,
+      imagenUrl: this.downloadUrl,
+      fileRef: this.filePath,
+    };
+    if (rubro.id) {
+      return this.rubroCollection.doc(rubro.id).update(rubroObj);
+    } else {
+      // @ts-ignore
+      return this.rubroCollection.add(rubroObj);
+    }
+  }
 
   //RUBROS
-
-
-  nuevoRubro(record : any) {
-    return this.fs.collection('rubros').add(record);
-  }
 
   public listarRubros(): Observable<any[]> {
     return this.rubroCollection
@@ -83,14 +96,14 @@ export class PageService {
       );
   }
 
+  public listarRubro(id: number): Observable<RubroModel> {
+    return this.fs.doc<any>(`rubros/${id}`).valueChanges();
+  }
 
-  // update_Student(recordID,record){
-  //   this.fs.doc('Students/' + recordID).update(record);
-  // }
-  //
-  // delete_Student(record_id) {
-  //   this.fs.doc('Students/' + record_id).delete();
-  // }
+  public eliminarRubroId(rubro: RubroModel) {
+    return this.rubroCollection.doc(rubro.id).delete();
+  }
+
 
 
 }

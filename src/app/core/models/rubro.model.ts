@@ -10,6 +10,7 @@ export interface RubroModel {
   id?: string;
   nombre: string;
   descripcion: string;
-  imagenUrl?: string;
+  imagenUrl?: any;
   estado?: EstadoEnum;
+  fileRef?: string;
 }
