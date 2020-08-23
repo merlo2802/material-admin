@@ -75,17 +75,17 @@ export class RubroComponent extends ClicComponent implements OnInit {
   // @ts-ignore
   public flex: number;
   onGtLgScreen() {
-    this.flex = 10;
+    this.flex = 33;
     this.dialogWidth = '750px';
   }
 
   onLgScreen() {
-    this.flex = 15;
+    this.flex = 33;
     this.dialogWidth = '750px';
   }
 
   onMdScreen() {
-    this.flex = 25;
+    this.flex = 33;
     this.dialogWidth = '750px';
   }
 

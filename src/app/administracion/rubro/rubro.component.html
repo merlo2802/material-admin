@@ -9,19 +9,21 @@
       <!-- HEADER -->
       <div class="header" fxLayout="row wrap" fxLayoutAlign="center center">
         <!-- APP TITLE -->
-        <div class="logo mb-24 mb-md-0" fxFlex="30"  fxLayoutAlign="start center">
+        <div  [fxFlex]="this.flex"  fxLayoutAlign="start center">
+          <div>
             <mat-icon class="logo-icon s-32 mr-16" >
               shopping_basket
             </mat-icon>
             <span class="text-white h1">
               Rubros
             </span>
+          </div>
         </div>
         <!-- / APP TITLE -->
 
         <!-- SEARCH -->
-        <div fxFlex="30" class="search-wrapper mx-32 mx-md-0">
-          <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+        <div [fxFlex]="this.flex" class="search-wrapper mx-32 mx-md-0">
+          <div class="search" fxLayoutAlign="center center">
             <mat-icon>search</mat-icon>
             <input #filter placeholder="Buscar por rubros">
           </div>
@@ -29,7 +31,7 @@
         <!-- / SEARCH -->
 
         <!-- ADD BUTTON -->
-        <div fxFlex="30">
+        <div [fxFlex]="this.flex" fxLayoutAlign="end center">
           <button mat-raised-button
                   (click)="this.crearRubro()"
                   class="add-button text-black mt-24 mt-md-0">
