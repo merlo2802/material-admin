@@ -6,10 +6,10 @@
  */
 
 import { EstadoEnum } from './enums/estadoEnum';
-export class RubroModel {
-  id : string ;
-  nombre : string | null;
-  descripcion : string | null;
-  imagenUrl : string | null;
-  estado : EstadoEnum | null;
+export interface RubroModel {
+  id?: string;
+  nombre: string;
+  descripcion: string;
+  imagenUrl?: string;
+  estado?: EstadoEnum;
 }

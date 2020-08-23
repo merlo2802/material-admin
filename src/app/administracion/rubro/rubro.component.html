@@ -7,24 +7,20 @@
     <div class="center">
 
       <!-- HEADER -->
-      <div class="header"
-           fxLayout="column" fxLayoutAlign="center center"
-           fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="space-between center">
-
+      <div class="header" fxLayout="row wrap" fxLayoutAlign="center center">
         <!-- APP TITLE -->
-        <div class="logo mb-24 mb-md-0"
-             fxLayout="row" fxLayoutAlign="start center">
-          <mat-icon class="logo-icon s-32 mr-16" >
-            shopping_basket
-          </mat-icon>
-          <span class="text-white h1">
-            Rubros
-          </span>
+        <div class="logo mb-24 mb-md-0" fxFlex="30"  fxLayoutAlign="start center">
+            <mat-icon class="logo-icon s-32 mr-16" >
+              shopping_basket
+            </mat-icon>
+            <span class="text-white h1">
+              Rubros
+            </span>
         </div>
         <!-- / APP TITLE -->
 
         <!-- SEARCH -->
-        <div class="search-wrapper mx-32 mx-md-0">
+        <div fxFlex="30" class="search-wrapper mx-32 mx-md-0">
           <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
             <mat-icon>search</mat-icon>
             <input #filter placeholder="Buscar por rubros">
@@ -33,76 +29,66 @@
         <!-- / SEARCH -->
 
         <!-- ADD BUTTON -->
-        <button mat-raised-button
-                (click)="abrirDialogo()"
-                class="add-button text-black mt-24 mt-md-0">
-          <span>NUEVO RUBRO</span>
-        </button>
+        <div fxFlex="30">
+          <button mat-raised-button
+                  (click)="this.crearRubro()"
+                  class="add-button text-black mt-24 mt-md-0">
+            <span>NUEVO RUBRO</span>
+          </button>
+        </div>
         <!-- / ADD BUTTON -->
 
       </div>
       <!-- / HEADER -->
 
       <!-- CONTENT CARD -->
-      <div class="content-card">
+      <div fxLayout="row wrap">
+        <div fxFlex="100" class="content-card">
+            <ngx-datatable #table class="material"
+                       [messages]="this.tableMessages()"
+                       [columnMode]="'force'"
+                       [headerHeight]="50"
+                       [footerHeight]="50"
+                       [rowHeight]="'auto'"
+                       [limit]='10'
+                       [rows]="this.listaRubro"
+                       [scrollbarH]="this.scrollH">
+  
+                <ngx-datatable-column name="Acciones" [minWidth]="150" [maxWidth]="240" [draggable]="false"
+                                      [resizeable]="false">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <button mat-icon-button matTooltip="Actualizar Rubro" (click)="this.actualizarRubro(row)">
+                      <mat-icon fxLayoutAlign="center center" color="accent">edit</mat-icon>
+                    </button>
 
-        <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-          <!--buttons-->
-          <ng-container matColumnDef="actions">
-            <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
-            <mat-cell *matCellDef="let element">
-              <button mat-icon-button matTooltip="Actualizar Rubro" (click)="this.editar(element)"><mat-icon fxLayoutAlign="start start" color="warn" >edit</mat-icon></button>
-              <button mat-icon-button matTooltip="Eliminar Rubro" (click)="this.editar(element)"><mat-icon fxLayoutAlign="start start" color="warn" >delete</mat-icon></button>
-            </mat-cell>
-          </ng-container>
-          <!-- Position Column -->
-          <ng-container matColumnDef="position">
-            <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
-          </ng-container>
+                    <button mat-icon-button matTooltip="Eliminar Rubro" (click)="this.eliminarRubro(row)">
+                      <mat-icon fxLayoutAlign="start start" color="accent">delete</mat-icon>
+                    </button>
+                  </ng-template>
+                </ngx-datatable-column>
+        
+                <ngx-datatable-column name="Nombre" [draggable]="false" [resizeable]="false">
+                  <ng-template let-row="row" ngx-datatable-cell-template class="text-bottom">
+                    {{row.nombre}}
+                  </ng-template>
+                </ngx-datatable-column>
 
-          <!-- Image Column -->
-          <ng-container  matColumnDef="image">
-            <mat-header-cell *matHeaderCellDef>Imagen</mat-header-cell>
-            <mat-cell *matCellDef="let element">
-              <img style="min-width: 200px"
-                   *ngIf="element.featuredImageId" [alt]="element.name"
-                   [src]="element.images[element.featuredImageId].url"/>
-              <img *ngIf="!element.featuredImageId"
-                   [src]="'../../../assets/images/test/reaching.jpg'">
-            </mat-cell>
-          </ng-container>
+                <ngx-datatable-column name="Descripción" [draggable]="false" [resizeable]="false">
+                  <ng-template let-row="row" ngx-datatable-cell-template class="text-bottom">
+                    {{row.descripcion}}
+                  </ng-template>
+                </ngx-datatable-column>
 
-          <!-- Name Column -->
-          <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-          </ng-container>
+                <ngx-datatable-column name="Imagen" [draggable]="false" [resizeable]="false">
+                  <ng-template let-row="row" ngx-datatable-cell-template class="text-bottom">
+                    <div width="50px" height="60px">
+                      <img [src]="row.imagenUrl">
+                    </div>
+                  </ng-template>
+                </ngx-datatable-column>
 
-          <!-- Weight Column -->
-          <ng-container matColumnDef="weight">
-            <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
-          </ng-container>
-
-          <!-- Symbol Column -->
-          <ng-container matColumnDef="symbol">
-            <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="active">
-            <mat-header-cell *matHeaderCellDef>Active</mat-header-cell>
-            <mat-cell *matCellDef="let element">
-              <mat-icon *ngIf="element.active" class="active-icon green-600 s-16" >create</mat-icon>
-              <mat-icon *ngIf="!element.active" class="active-icon red-500 s-16" >create</mat-icon>
-            </mat-cell>
-          </ng-container>
-
-          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-        </mat-table>
-
+            </ngx-datatable>
+        </div>
       </div>
       <!-- / CONTENT CARD -->
     </div>
