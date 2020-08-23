@@ -39,7 +39,9 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     NgxDropzoneModule,
   ],
   providers: [],
-  entryComponents: [],
+  entryComponents: [ 
+    DialogoCrearEditarRubroComponent
+  ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
 })
 export class AdministracionModule { }

@@ -20,7 +20,7 @@ export class RubroComponent extends ClicComponent implements OnInit {
   public listaRubro: RubroModel[];
 
   constructor(
-      private pageService: PageService,
+      private rubroService: PageService,
       public matDialog: MatDialog,
       private notifier: NotifierService
   ) {
@@ -28,48 +28,43 @@ export class RubroComponent extends ClicComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  
+    this.listarRubros();
   }
 
   private listarRubros(): void {
-
+    this.rubroService.listarRubros().subscribe(respuesta => {
+      this.listaRubro = respuesta;
+    }, error => {
+      console.log(error, 'errorCapturado');
+    });
   }
 
   public crearRubro(): void {
-    this.matDialog.open()
+    this.matDialog.open(DialogoCrearEditarRubroComponent, this.dialogConfig({
+      accion: 'CREAR'
+    })).afterClosed().subscribe((respuesta: boolean) => {
+      if (respuesta) {
+        let mensaje = {error: {title: 'Crear Rubro', detail: 'Rubro creado satisfactoriamente'}};
+        this.notifierError(mensaje, 'succes');
+      }
+    });
   }
 
   public actualizarRubro(rubro: RubroModel): void {
-   
+    this.matDialog.open(DialogoCrearEditarRubroComponent, this.dialogConfig({
+      accion: 'ACTUALIZAR',
+      rubro: rubro
+    })).afterClosed().subscribe((respuesta: boolean) => {
+      if (respuesta) {
+        let mensaje = {error: {title: 'Actualizar Rubro', detail: 'Rubro actualizado satisfactoriamente'}};
+        this.notifierError(mensaje, 'succes');
+      }
+    });
   }
 
   public eliminarRubro(rubro: RubroModel): void {
 
   }
-
-  guardar(form : NgForm) {
-    if(form.invalid) {
-      return;
-    }
-    this.pageService.GuardarRubro(this.rubro).subscribe(resp => {
-      console.log(resp);
-    })
-  }
-
-  editar(evento: any)
-  {
-    console.log("llega", evento)
-  }
-  abrirDialogo(){
-    const temporal = ""
-    this.matDialog.open(DialogoCrearEditarRubroComponent, {
-      width: '550px',
-      minWidth: '550px',
-      panelClass: ['zero-padding', 'scroll-x-hidden'],
-      data: temporal
-    });
-  }
-
 
   notifierError(error: any, type?: string) {
     if (error && error.error) {
