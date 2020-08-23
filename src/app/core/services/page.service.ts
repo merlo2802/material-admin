@@ -6,7 +6,8 @@ import {environment} from "../../../environments/environment";
 import {FileI} from "../models/interfaces/file.interface";
 import {Observable} from "rxjs";
 import {AngularFireStorage} from "@angular/fire/storage";
-import {AngularFirestore} from "@angular/fire/firestore";
+import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/firestore";
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +17,14 @@ export class PageService {
   private filepath :any ;
   private downloadUrl: Observable<string>
   private url = environment.apiUrl;
+  public rubroCollection : AngularFirestoreCollection<RubroModel>;
   constructor(
     private http:HttpClient,
     private storage: AngularFireStorage,
     private fs: AngularFirestore,
-  ) { }
+  ) {
+    this.rubroCollection =   fs.collection<RubroModel>('rubros');
+  }
 
   GuardarRubro(rubro: RubroModel) {
     return this.http.post(`${this.url}/rubros.json`, rubro)
@@ -63,8 +67,20 @@ export class PageService {
     return this.fs.collection('rubros').add(record);
   }
 
-  listarRubros() {
-    return this.fs.collection('rubros').snapshotChanges();
+  public listarRubros(): Observable<any[]> {
+    return this.rubroCollection
+      .snapshotChanges()
+      .pipe(
+        map(actions =>
+          actions.map(a => {
+            const body = a.payload.doc.data() as RubroModel;
+            body.id= a.payload.doc.id;
+            // const i = new RubroModel();
+            // i.id = a.payload.doc.id;
+            return { ...body };
+          })
+        )
+      );
   }
 
 
