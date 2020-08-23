@@ -47,26 +47,29 @@ export class PageService {
     const fileRef = this.storage.ref(this.filePath);
     const task = this.storage.upload(this.filePath, imagen);
     task.snapshotChanges()
-    .pipe(
-      finalize(() => {
+    .pipe( finalize(() => {
+        console.log("entra");
         fileRef.getDownloadURL().subscribe(urlImagen => {
           this.downloadUrl = urlImagen;
           console.log('url_image', urlImagen);
           console.log('url_post', rubro);
           this.guardarRubro(rubro);
-        })
+        });
       })
-    )
+    ).subscribe();
   }
 
   public preAddAndUpdateRubro(rubro: RubroModel, image: FileI): void {
+    console.log(rubro,image,"rubro imagen")
     this.subirImagen(rubro, image);
   }
 
   private guardarRubro(rubro: RubroModel) {
+    console.log("llega el rubro", rubro);
     const rubroObj =  {
       descripcion: rubro.descripcion,
       estado: rubro.estado,
+      nombre: rubro.nombre,
       imagenUrl: this.downloadUrl,
       fileRef: this.filePath,
     };
