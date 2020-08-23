@@ -7,7 +7,6 @@ import {FileI} from "../models/interfaces/file.interface";
 import {Observable} from "rxjs";
 import {AngularFireStorage} from "@angular/fire/storage";
 import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/firestore";
-import {tryCatch} from "rxjs/internal-compatibility";
 
 
 @Injectable({
@@ -15,10 +14,11 @@ import {tryCatch} from "rxjs/internal-compatibility";
 })
 export class PageService {
   //imagenes en firebase storage
-  private filepath :any ;
+  private filePath :any ;
   private downloadUrl: Observable<string>
   private url = environment.apiUrl;
   public rubroCollection : AngularFirestoreCollection<RubroModel>;
+
   constructor(
     private http:HttpClient,
     private storage: AngularFireStorage,
@@ -43,9 +43,9 @@ export class PageService {
 
 
   private subirImagen(rubro:RubroModel, imagen:FileI ){
-    this.filepath = `imagenes/rubros/${imagen.name}`;
-    const fileRef = this.storage.ref(this.filepath);
-    const task = this.storage.upload(this.filepath, imagen);
+    this.filePath = `imagenes/rubros/${imagen.name}`;
+    const fileRef = this.storage.ref(this.filePath);
+    const task = this.storage.upload(this.filePath, imagen);
     task.snapshotChanges()
     .pipe(
       finalize(() => {
@@ -53,17 +53,28 @@ export class PageService {
           this.downloadUrl = urlImagen;
           console.log('url_image', urlImagen);
           console.log('url_post', rubro);
-          //llamar al metodo a guardar
+          this.guardarRubro(rubro);
         })
       })
     )
   }
 
-  //RUBROS
-
-  nuevoRubro(record : any) {
-    return this.fs.collection('rubros').add(record);
+  private guardarRubro(rubro: RubroModel) {
+    const rubroObj =  {
+      descripcion: rubro.descripcion,
+      estado: rubro.estado,
+      imagenUrl: this.downloadUrl,
+      fileRef: this.filePath,
+    };
+    if (rubro.id) {
+      return this.rubroCollection.doc(rubro.id).update(rubroObj);
+    } else {
+      // @ts-ignore
+      return this.rubroCollection.add(rubroObj);
+    }
   }
+
+  //RUBROS
 
   public listarRubros(): Observable<any[]> {
     return this.rubroCollection
@@ -82,7 +93,7 @@ export class PageService {
   }
 
   public listarRubro(id: number): Observable<RubroModel> {
-    return this.fs.doc<RubroModel>(`rubros/${id}`).valueChanges();
+    return this.fs.doc<any>(`rubros/${id}`).valueChanges();
   }
 
   public eliminarRubroId(rubro: RubroModel) {

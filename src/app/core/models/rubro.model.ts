@@ -7,9 +7,10 @@
 
 import { EstadoEnum } from './enums/estadoEnum';
 export class RubroModel {
-  id : string ;
-  nombre : string | null;
-  descripcion : string | null;
-  imagenUrl : string | null;
-  estado : EstadoEnum | null;
+  id : string  | undefined;
+  nombre : string | undefined;
+  descripcion : string | undefined;
+  imagenUrl ?: any;
+  estado : EstadoEnum | undefined;
+  fileRef?: string;
 }
