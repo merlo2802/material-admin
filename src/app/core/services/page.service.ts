@@ -59,7 +59,7 @@ export class PageService {
     )
   }
 
-  public preAddAndUpdatePost(rubro: RubroModel, image: FileI): void {
+  public preAddAndUpdateRubro(rubro: RubroModel, image: FileI): void {
     this.subirImagen(rubro, image);
   }
 
