@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { RubroModel } from '../models/rubro.model';
+import {RubroModel} from '../models/rubro.model';
 import {finalize, map} from 'rxjs/operators';
 import {environment} from "../../../environments/environment";
 import {FileI} from "../models/interfaces/file.interface";
@@ -57,6 +57,10 @@ export class PageService {
         })
       })
     )
+  }
+
+  public preAddAndUpdatePost(rubro: RubroModel, image: FileI): void {
+    this.subirImagen(rubro, image);
   }
 
   private guardarRubro(rubro: RubroModel) {
