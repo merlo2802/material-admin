@@ -7,6 +7,7 @@ import {FileI} from "../models/interfaces/file.interface";
 import {Observable} from "rxjs";
 import {AngularFireStorage} from "@angular/fire/storage";
 import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/firestore";
+import {tryCatch} from "rxjs/internal-compatibility";
 
 
 @Injectable({
@@ -26,19 +27,19 @@ export class PageService {
     this.rubroCollection =   fs.collection<RubroModel>('rubros');
   }
 
-  GuardarRubro(rubro: RubroModel) {
-    return this.http.post(`${this.url}/rubros.json`, rubro)
-      .pipe(
-        map((resp: any) => {
-          rubro.id = resp.name;
-          return rubro;
-        })
-      );
-  }
+  // GuardarRubro(rubro: RubroModel) {
+  //   return this.http.post(`${this.url}/rubros.json`, rubro)
+  //     .pipe(
+  //       map((resp: any) => {
+  //         rubro.id = resp.name;
+  //         return rubro;
+  //       })
+  //     );
+  // }
 
-  actualizarRubro(rubro: RubroModel){
-    return this.http.put(`${this.url}/rubro/${rubro.id}.json`, rubro)
-  }
+  // actualizarRubro(rubro: RubroModel){
+  //   return this.http.put(`${this.url}/rubro/${rubro.id}.json`, rubro)
+  // }
 
 
   private subirImagen(rubro:RubroModel, imagen:FileI ){
@@ -58,10 +59,7 @@ export class PageService {
     )
   }
 
-
-
   //RUBROS
-
 
   nuevoRubro(record : any) {
     return this.fs.collection('rubros').add(record);
@@ -83,14 +81,14 @@ export class PageService {
       );
   }
 
+  public listarRubro(id: number): Observable<RubroModel> {
+    return this.fs.doc<RubroModel>(`rubros/${id}`).valueChanges();
+  }
 
-  // update_Student(recordID,record){
-  //   this.fs.doc('Students/' + recordID).update(record);
-  // }
-  //
-  // delete_Student(record_id) {
-  //   this.fs.doc('Students/' + record_id).delete();
-  // }
+  public eliminarRubroId(rubro: RubroModel) {
+    return this.rubroCollection.doc(rubro.id).delete();
+  }
+
 
 
 }
