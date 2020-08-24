@@ -9,6 +9,7 @@ import {Page} from "../../core/utils/paginator/page";
 import { NotifierService } from 'angular-notifier';
 import {DialogoCrearEditarRubroComponent} from "./dialogo-crear-editar-rubro/dialogo-crear-editar-rubro.component";
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import {finalize} from "rxjs/operators";
 
 @Component({
   selector: 'app-rubro',
@@ -67,7 +68,14 @@ export class RubroComponent extends ClicComponent implements OnInit {
   }
 
   public eliminarRubro(rubro: RubroModel): void {
-	this.rubroService.eliminarRubroId(rubro);
+    this.blockUI.start("eliminado rubro");
+    this.rubroService.eliminarRubroId(rubro).subscribe(() =>{
+
+        this.blockUI.stop();
+    }, error => {
+      this.blockUI.stop();
+      console.log(error, 'errorCapturado');
+    });
   }
 
   notifierError(error: any, type?: string) {

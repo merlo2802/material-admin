@@ -18,7 +18,7 @@ import { BlockUI, NgBlockUI } from 'ng-block-ui';
 })
 export class DialogoCrearEditarRubroComponent extends ClicComponent implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
-  
+
   public crear: boolean;
   public form: FormGroup;
   public flex: number ;
@@ -34,7 +34,7 @@ export class DialogoCrearEditarRubroComponent extends ClicComponent implements O
     ) {
       super();
   }
-  
+
   ngOnInit() {
 	this.vistaPrevia = this.data.accion == 'CREAR';
     this.crear = this.data.accion == 'CREAR';
@@ -79,12 +79,20 @@ export class DialogoCrearEditarRubroComponent extends ClicComponent implements O
 
   private nuevoRubro(): void {
     const rubro = this.setearValores();
-    this.rubroService.preAddAndUpdateRubro(rubro, this.image);
+    this.blockUI.start("creando rubro");
+    this.rubroService.preAddAndUpdateRubro(rubro, this.image).subscribe(()=>{
+      console.log("finalizado la creacion");
+      this.blockUI.stop();
+    });
   }
 
   private actualizarRubro(): void {
     const rubro = this.setearValores();
-    this.rubroService.preAddAndUpdateRubro(rubro, this.image);
+    this.blockUI.start("actualizando  rubro");
+    this.rubroService.preAddAndUpdateRubro(rubro, this.image).subscribe(() => {
+      console.log("finalizando la creacion");
+      this.blockUI.stop();
+    });
   }
 
   private setearValores(): RubroModel {
@@ -103,7 +111,7 @@ export class DialogoCrearEditarRubroComponent extends ClicComponent implements O
   }
 
   onSelect(event: any) {
-    if (event.addedFiles.length > 0) {	
+    if (event.addedFiles.length > 0) {
       this.vistaPrevia = true;
       if (this.files.length > 0) {
         this.files = [];
