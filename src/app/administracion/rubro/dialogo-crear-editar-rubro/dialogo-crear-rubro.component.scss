@@ -8,7 +8,24 @@ input[type = 'file'] {
   cursor: pointer;
   width: 100%;
 }
+
+.custom-dropzone {
+	height: 250px;
+//	background: $background-imagen;
+//	color: #fff;
+//	border: 1px dashed rgb(235, 79, 79);
+	border-radius: 5px;
+	font-size: 20px;
+	justify-content: center;
+	overflow-y: hidden;
+}
+
 .container-input-file{
   margin-top: 1rem;
+}
+
+.imagen {
+  width: auto !important;
+  height: 90% !important;
 }
 

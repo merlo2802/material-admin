@@ -4,6 +4,7 @@
   </mat-card-header>
   <mat-card-content>
       <form [formGroup]="this.form" (ngSubmit)="this.guardarRubro()">
+		<mat-dialog-content>
         <div fxLayout="row wrap">
 
           <div fxFlex="100" class="m-t-10">
@@ -35,18 +36,20 @@
 
           <div fxFlex="100" class="m-t-10">
               <div class="custom-dropzone" ngx-dropzone [accept]="'image/*'" (change)="onSelect($event)">
-                <ngx-dropzone-label>
+                <ngx-dropzone-label *ngIf="this.vistaPrevia">
                   <div><h3>Seleccionar imágen de rubro</h3></div>
                 </ngx-dropzone-label>
-                <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor='let f of this.files' [file]='f' [removable]="true" (removed)="onRemove(f)">
+                <ngx-dropzone-image-preview [hidden]="!this.vistaPrevia" ngProjectAs="ngx-dropzone-preview" *ngFor='let f of this.files' [file]='f' [removable]="true" (removed)="onRemove(f)">
                   <ngx-dropzone-label></ngx-dropzone-label>
                 </ngx-dropzone-image-preview>
+				<img *ngIf="!this.vistaPrevia" id="vistaImagen" src="{{this.crear ? '' : this.data.rubro.imagenUrl}}" alt="" class="imagen">
               </div>
               <mat-error *ngIf="this.form.get('imagen')?.hasError('required') && this.form.get('imagen')?.touched" class="text-danger font-11">la imágen es <strong>requerida</strong></mat-error>
           </div>
           
 
         </div>
+		</mat-dialog-content>
         <mat-card-actions fxLayoutAlign="end center" fxLayoutGap="5px" >
           <button mat-flat-button color="accent" type="submit">Guardar</button>
           <button mat-stroked-button color="warn" type="button" (click)="this.cancelar()">Cancelar</button>

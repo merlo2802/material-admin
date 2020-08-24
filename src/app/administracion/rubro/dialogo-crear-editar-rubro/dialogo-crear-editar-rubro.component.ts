@@ -9,6 +9,7 @@ import { Page } from 'app/core/utils/paginator/page';
 import { NotifierService } from 'angular-notifier';
 import { CustomOptions } from 'app/core/dto/custom-options';
 import { RubroModel } from 'app/core/models/rubro.model';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 
 @Component({
   selector: 'app-dialogo-crear-editar-rubro',
@@ -16,6 +17,8 @@ import { RubroModel } from 'app/core/models/rubro.model';
   styleUrls: ['./dialogo-crear-rubro.component.scss']
 })
 export class DialogoCrearEditarRubroComponent extends ClicComponent implements OnInit {
+  @BlockUI() blockUI: NgBlockUI;
+  
   public crear: boolean;
   public form: FormGroup;
   public flex: number ;
@@ -33,6 +36,7 @@ export class DialogoCrearEditarRubroComponent extends ClicComponent implements O
   }
   
   ngOnInit() {
+	this.vistaPrevia = this.data.accion == 'CREAR';
     this.crear = this.data.accion == 'CREAR';
     this.cargarEstado();
     this.inicializarFormulario(this.data);

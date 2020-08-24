@@ -1,0 +1,29 @@
+<mat-card>
+  <mat-card-header class="bg-primary-theme text-white">
+    <mat-card-title>{{this.data.titulo}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+      <form (ngSubmit)="this.confirmar()">
+		<mat-dialog-content>
+        <div fxLayout="row wrap">
+
+          <div fxFlex="100" class="m-t-10" fxLayoutAlign="center center">
+            <div>
+				<h4>{{this.data.descripcion}}</h4>
+			</div>
+          </div>
+
+        </div>
+		</mat-dialog-content>
+        <mat-card-actions fxLayoutAlign="end center" fxLayoutGap="5px" >
+          <button mat-flat-button color="accent" type="submit">Continuar</button>
+          <button mat-stroked-button color="warn" type="button" (click)="this.cancelar()">Cancelar</button>
+        </mat-card-actions>
+      </form>
+  </mat-card-content>
+</mat-card>
+
+<ng-template #customNotification let-notificationData="notification">
+    <app-custom-notification [notificationData]="notificationData"></app-custom-notification>
+</ng-template>
+

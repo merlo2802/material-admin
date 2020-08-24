@@ -7,12 +7,13 @@ import {FileI} from "../models/interfaces/file.interface";
 import {Observable} from "rxjs";
 import {AngularFireStorage} from "@angular/fire/storage";
 import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/firestore";
-
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PageService {
+  @BlockUI() blockUI: NgBlockUI;
   //imagenes en firebase storage
   private filePath :any ;
   private downloadUrl: Observable<string>

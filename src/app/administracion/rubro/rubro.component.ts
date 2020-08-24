@@ -8,6 +8,7 @@ import {CustomOptions} from "../../core/dto/custom-options";
 import {Page} from "../../core/utils/paginator/page";
 import { NotifierService } from 'angular-notifier';
 import {DialogoCrearEditarRubroComponent} from "./dialogo-crear-editar-rubro/dialogo-crear-editar-rubro.component";
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 
 @Component({
   selector: 'app-rubro',
@@ -15,7 +16,7 @@ import {DialogoCrearEditarRubroComponent} from "./dialogo-crear-editar-rubro/dia
   styleUrls: ['./rubro.component.scss']
 })
 export class RubroComponent extends ClicComponent implements OnInit {
-  
+  @BlockUI() blockUI: NgBlockUI;
   public rubro: RubroModel;
   public listaRubro: RubroModel[];
 
@@ -32,9 +33,12 @@ export class RubroComponent extends ClicComponent implements OnInit {
   }
 
   private listarRubros(): void {
+	this.blockUI.start('Recuperando lista de rubros...');
     this.rubroService.listarRubros().subscribe(respuesta => {
+	  this.blockUI.stop();
       this.listaRubro = respuesta;
     }, error => {
+	  this.blockUI.stop();
       console.log(error, 'errorCapturado');
     });
   }
@@ -63,7 +67,7 @@ export class RubroComponent extends ClicComponent implements OnInit {
   }
 
   public eliminarRubro(rubro: RubroModel): void {
-
+	this.rubroService.eliminarRubroId(rubro);
   }
 
   notifierError(error: any, type?: string) {
@@ -76,27 +80,32 @@ export class RubroComponent extends ClicComponent implements OnInit {
   public flex: number;
   onGtLgScreen() {
     this.flex = 33;
-    this.dialogWidth = '750px';
+    this.dialogWidth = '650px';
+	this.dialogMaxWidth = '650px';
   }
 
   onLgScreen() {
     this.flex = 33;
-    this.dialogWidth = '750px';
+    this.dialogWidth = '650px';
+	this.dialogMaxWidth = '650px';
   }
 
   onMdScreen() {
     this.flex = 33;
-    this.dialogWidth = '750px';
+    this.dialogWidth = '650px';
+	this.dialogMaxWidth = '650px';
   }
 
   onSmScreen() {
     this.flex = 100;
     this.dialogWidth = '99%';
+	this.dialogMaxWidth = '99%';
   }
 
   onXsScreen() {
     this.flex = 100;
     this.dialogWidth = '99%';
+	this.dialogMaxWidth = '95vw';
   }
 
   setPage(pageInfo: Page) {}

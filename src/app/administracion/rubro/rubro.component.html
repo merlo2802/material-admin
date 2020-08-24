@@ -83,9 +83,11 @@
 
                 <ngx-datatable-column name="Imagen" [draggable]="false" [resizeable]="false">
                   <ng-template let-row="row" ngx-datatable-cell-template class="text-bottom">
-                    <div width="50px" height="60px">
-                      <img [src]="row.imagenUrl">
-                    </div>
+                    <div fxLayout="row wrap">
+						<div fxFlex="100" style="height: 100%; width: 100%">
+							<img [src]="row.imagenUrl" class="imagen-miniatura" alt="X">
+						</div>
+					</div>
                   </ng-template>
                 </ngx-datatable-column>
 

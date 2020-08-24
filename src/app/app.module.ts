@@ -30,6 +30,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 //EndFirebase
 import { NgxSpinnerModule } from 'ngx-spinner';
 import {environment} from "../environments/environment";
+import { BlockUIModule } from 'ng-block-ui';
+import { DialogConfirmacionComponent } from './core/utils/dialog-confirmacion/dialog-confirmacion.component';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -78,7 +80,8 @@ const customNotifierOptions: NotifierOptions = {
     AppBlankComponent,
     AppHeaderComponent,
     SpinnerComponent,
-    AppSidebarComponent
+    AppSidebarComponent,
+    DialogConfirmacionComponent
   ],
   imports: [
     BrowserModule,
@@ -96,6 +99,7 @@ const customNotifierOptions: NotifierOptions = {
     FlexLayoutModule,
     HttpClientModule,
     SharedModule,
+	BlockUIModule.forRoot()
    
   ],
   providers: [
@@ -107,6 +111,10 @@ const customNotifierOptions: NotifierOptions = {
     AngularFireDatabase,
     MatDialog
   ],
+  entryComponents: [ 
+    DialogConfirmacionComponent
+  ],
+  exports: [DialogConfirmacionComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

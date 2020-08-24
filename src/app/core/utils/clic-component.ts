@@ -67,6 +67,7 @@ export abstract class ClicComponent {
    */
     // @ts-ignore
   public dialogWidth: string;
+  public dialogMaxWidth: string;
 
   /**
    * porcentaje del dialogos de notificacion y confirmacion frente a la dimension actual de pantalla ('20%')
@@ -164,6 +165,7 @@ export abstract class ClicComponent {
         this.scrollH = true;
         this.confirmDialogWith = '90%';
         this.dialogWidth = '99%';
+		this.dialogMaxWidth = '95vw';
         this.onXsScreen();
       }
     };
@@ -172,6 +174,7 @@ export abstract class ClicComponent {
         this.scrollH = true;
         this.confirmDialogWith = '80%';
         this.dialogWidth = '90%';
+		this.dialogMaxWidth = '90vw';
         this.onSmScreen();
       }
     };
@@ -180,6 +183,7 @@ export abstract class ClicComponent {
         this.scrollH = true;
         this.confirmDialogWith = '40%';
         this.dialogWidth = '60%';
+		this.dialogMaxWidth = '650px';
         this.onMdScreen();
       }
     };
@@ -189,6 +193,7 @@ export abstract class ClicComponent {
         this.scrollH = false;
         this.confirmDialogWith = '575px';
         this.dialogWidth = '50%';
+		this.dialogMaxWidth = '650px';
         this.onLgScreen();
       }
     };
@@ -198,6 +203,7 @@ export abstract class ClicComponent {
         this.scrollH = false;
         this.confirmDialogWith = '575px';
         this.dialogWidth = '50%';
+		this.dialogMaxWidth = '650px';
         this.onGtLgScreen();
       }
     };
@@ -206,6 +212,7 @@ export abstract class ClicComponent {
       this.scrollH = true;
       this.confirmDialogWith = '90%';
       this.dialogWidth = '99%';
+	  this.dialogMaxWidth = '95vw';
       this.onXsScreen();
     }
 
@@ -213,6 +220,7 @@ export abstract class ClicComponent {
       this.scrollH = true;
       this.confirmDialogWith = '80%';
       this.dialogWidth = '90%';
+	  this.dialogMaxWidth = '90vw';
       this.onSmScreen();
     }
 
@@ -220,6 +228,7 @@ export abstract class ClicComponent {
       this.scrollH = true;
       this.confirmDialogWith = '40%';
       this.dialogWidth = '60%';
+	  this.dialogMaxWidth = '650px';
       this.onMdScreen();
     }
 
@@ -227,6 +236,7 @@ export abstract class ClicComponent {
       this.scrollH = false;
       this.confirmDialogWith = '575px';
       this.dialogWidth = '50%';
+	  this.dialogMaxWidth = '650px';
       this.onLgScreen();
     }
 
@@ -234,6 +244,7 @@ export abstract class ClicComponent {
       this.scrollH = false;
       this.confirmDialogWith = '575px';
       this.dialogWidth = '50%';
+	  this.dialogMaxWidth = '650px';
       this.onGtLgScreen();
     }
   }
@@ -260,8 +271,9 @@ export abstract class ClicComponent {
 
   public dialogConfig(data: any) {
     return {
-      width: this.dialogWidth,
+      width: '650px',
       minWidth: this.dialogWidth,
+	  maxWidth: '95vw',
       panelClass: ['zero-padding', 'scroll-x-hidden'],
       data
     };
