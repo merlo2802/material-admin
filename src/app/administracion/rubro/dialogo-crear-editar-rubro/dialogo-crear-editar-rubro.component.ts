@@ -79,20 +79,26 @@ export class DialogoCrearEditarRubroComponent extends ClicComponent implements O
 
   private nuevoRubro(): void {
     const rubro = this.setearValores();
-    this.blockUI.start("creando rubro");
+    this.blockUI.start("Procesando la solicitud...");
     this.rubroService.preAddAndUpdateRubro(rubro, this.image).subscribe(()=>{
-      console.log("finalizado la creacion");
       this.blockUI.stop();
-    });
+	  this.dialogRef.close(true);
+    }, error => {
+		this.blockUI.stop();
+		if (error) this.notifierError(error);
+	});
   }
 
   private actualizarRubro(): void {
     const rubro = this.setearValores();
-    this.blockUI.start("actualizando  rubro");
+    this.blockUI.start("Procesando la solicitud...");
     this.rubroService.preAddAndUpdateRubro(rubro, this.image).subscribe(() => {
-      console.log("finalizando la creacion");
       this.blockUI.stop();
-    });
+	  this.dialogRef.close(true);
+    }, error => {
+		this.blockUI.stop();
+		if (error) this.notifierError(error);
+	});
   }
 
   private setearValores(): RubroModel {
