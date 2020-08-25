@@ -50,7 +50,7 @@ export class RubroComponent extends ClicComponent implements OnInit {
     })).afterClosed().subscribe((respuesta: boolean) => {
       if (respuesta) {
         let mensaje = {error: {title: 'Crear Rubro', detail: 'Rubro creado satisfactoriamente'}};
-        this.notifierError(mensaje, 'succes');
+        this.notifierError(mensaje, 'success');
       }
     });
   }
@@ -62,7 +62,7 @@ export class RubroComponent extends ClicComponent implements OnInit {
     })).afterClosed().subscribe((respuesta: boolean) => {
       if (respuesta) {
         let mensaje = {error: {title: 'Actualizar Rubro', detail: 'Rubro actualizado satisfactoriamente'}};
-        this.notifierError(mensaje, 'succes');
+        this.notifierError(mensaje);
       }
     });
   }

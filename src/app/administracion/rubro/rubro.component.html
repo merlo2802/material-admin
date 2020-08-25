@@ -90,6 +90,12 @@
 					</div>
                   </ng-template>
                 </ngx-datatable-column>
+				
+				<ngx-datatable-column name="Estádo" [draggable]="false" [resizeable]="false">
+                  <ng-template let-row="row" ngx-datatable-cell-template class="text-bottom">
+                    {{row.estado}}
+                  </ng-template>
+                </ngx-datatable-column>
 
             </ngx-datatable>
         </div>

@@ -65,7 +65,7 @@ export class PageService {
     }
   }
 
-  public preAddAndUpdateRubro(rubro: RubroModel, image: FileI): Observable<RubroModel> {
+  public preAddAndUpdateRubro(rubro: RubroModel, image: FileI): Observable<any> {
     if(!isNullOrUndefined(image)){
       return new Observable(():any => {
         this.subirImagen(rubro, image);
