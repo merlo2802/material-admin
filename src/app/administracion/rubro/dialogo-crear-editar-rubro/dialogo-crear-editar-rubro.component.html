@@ -19,7 +19,7 @@
 
           <div fxFlex="100" class="m-t-10">
             <mat-form-field>
-              <input matInput placeholder="Descripción:" autocomplete="false" formControlName="descripcion" maxlength="30">
+              <input matInput placeholder="Descripción:" autocomplete="false" formControlName="descripcion" maxlength="70">
               <mat-hint class="text-light" align="end">{{this.form.get('descripcion')?.value? this.form.get('descripcion')?.value.length:0}} / 70</mat-hint>
               <mat-error *ngIf="this.form.get('descripcion')?.hasError('maxlength') && this.form.get('descripcion')?.touched" class="text-danger font-11">Solo se admite máximo <strong>70 caracteres</strong></mat-error>
             </mat-form-field>
@@ -28,7 +28,7 @@
           <div fxFlex="100" class="m-t-10">
             <mat-form-field>
               <mat-select placeholder="Estado del Rubro" formControlName="estado">
-                <mat-option *ngFor="let item of this.listaEstado" [value]="item">{{item}}</mat-option>
+                <mat-option *ngFor="let estado of this.listaEstado" [value]="estado">{{estado}}</mat-option>
               </mat-select>
               <mat-error *ngIf="this.form.get('estado')?.hasError('required') && this.form.get('estado')?.touched" class="text-danger font-11">Este campo es <strong>requerido</strong></mat-error>
             </mat-form-field>
@@ -42,7 +42,7 @@
                 <ngx-dropzone-image-preview [hidden]="!this.vistaPrevia" ngProjectAs="ngx-dropzone-preview" *ngFor='let f of this.files' [file]='f' [removable]="true" (removed)="onRemove(f)">
                   <ngx-dropzone-label></ngx-dropzone-label>
                 </ngx-dropzone-image-preview>
-				<img *ngIf="!this.vistaPrevia" id="vistaImagen" src="{{this.crear ? '' : this.data.rubro.imagenUrl}}" alt="" class="imagen">
+				        <img *ngIf="!this.vistaPrevia" id="vistaImagen" src="{{this.crear ? '' : this.data.rubro.imagenUrl}}" alt="" class="imagen">
               </div>
               <mat-error *ngIf="this.form.get('imagen')?.hasError('required') && this.form.get('imagen')?.touched" class="text-danger font-11">la imágen es <strong>requerida</strong></mat-error>
           </div>

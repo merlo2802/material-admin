@@ -54,11 +54,7 @@ export class DialogoCrearEditarRubroComponent extends ClicComponent implements O
   }
 
   private cargarEstado() {
-    this.listaEstado = [
-      EstadoEnum.ACTIVO,
-      EstadoEnum.INACTIVO,
-      EstadoEnum.ELIMINADO,
-    ]
+    this.listaEstado = [EstadoEnum.ACTIVO,EstadoEnum.INACTIVO,EstadoEnum.ELIMINADO]
   }
 
   public cancelar(): void {

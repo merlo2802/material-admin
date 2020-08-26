@@ -31,8 +31,8 @@ const MENUITEMS: Menu[] = [
     
   ]},
   { urlModulo: 'configuracion', nombre: 'Configuración', tipo: 'modulo', icono: 'dns', inverseModulo:[
-    {urlModulo: 'paises', nombre: 'Países', tipo: 'submodulo', icono: 'dns', inverseModulo:[]},
-    {urlModulo: 'ciudades', nombre: 'Ciudades', tipo: 'submodulo', icono: 'dns', inverseModulo:[]},
+    {urlModulo: 'pais', nombre: 'Países', tipo: 'submodulo', icono: 'dns', inverseModulo:[]},
+    {urlModulo: 'ciudad', nombre: 'Ciudades', tipo: 'submodulo', icono: 'dns', inverseModulo:[]},
   ]},
 ];
 
