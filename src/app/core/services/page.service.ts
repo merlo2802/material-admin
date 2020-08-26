@@ -9,7 +9,6 @@ import {AngularFireStorage} from "@angular/fire/storage";
 import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/firestore";
 // @ts-ignore
 import {isNullOrUndefined} from "util";
-
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 
 @Injectable({
@@ -18,25 +17,25 @@ import { BlockUI, NgBlockUI } from 'ng-block-ui';
 export class PageService {
   @BlockUI() blockUI: NgBlockUI;
   //imagenes en firebase storage
-  private filePath :any ;
+  private filePath: any;
   private downloadUrl: Observable<string>
   private url = environment.apiUrl;
-  public rubroCollection : AngularFirestoreCollection<RubroModel>;
+  public rubroCollection: AngularFirestoreCollection<RubroModel>;
 
   constructor(
-    private http:HttpClient,
+    private http: HttpClient,
     private storage: AngularFireStorage,
     private fs: AngularFirestore,
   ) {
-    this.rubroCollection =   fs.collection<RubroModel>('rubros');
+    this.rubroCollection = fs.collection<RubroModel>('rubros');
   }
   //RUBROS
-  private subirImagen(rubro:RubroModel, imagen:FileI ){
+  async subirImagen(rubro: RubroModel, imagen: FileI) {
     this.filePath = `imagenes/rubros/${imagen.name}`;
     const fileRef = this.storage.ref(this.filePath);
     const task = this.storage.upload(this.filePath, imagen);
     task.snapshotChanges()
-      .pipe( finalize(() => {
+      .pipe(finalize(() => {
           fileRef.getDownloadURL().subscribe(urlImagen => {
             this.downloadUrl = urlImagen;
             console.log('url_image', urlImagen);
@@ -47,15 +46,15 @@ export class PageService {
       ).subscribe();
   }
 
-  private guardarRubro(rubro: RubroModel){
-    const rubroObj : RubroModel =  {
+  private guardarRubro(rubro: RubroModel) {
+    const rubroObj: RubroModel = {
       descripcion: rubro.descripcion,
       estado: rubro.estado,
       nombre: rubro.nombre,
     };
-    if(!isNullOrUndefined(this.downloadUrl && this.filePath)){
-        rubroObj.imagenUrl = this.downloadUrl;
-        rubroObj.fileRef = this.filePath;
+    if (!isNullOrUndefined(this.downloadUrl && this.filePath)) {
+      rubroObj.imagenUrl = this.downloadUrl;
+      rubroObj.fileRef = this.filePath;
     }
     if (rubro.id) {
       return this.rubroCollection.doc(rubro.id).update(rubroObj);
@@ -65,15 +64,11 @@ export class PageService {
     }
   }
 
-  public preAddAndUpdateRubro(rubro: RubroModel, image: FileI): Observable<any> {
-    if(!isNullOrUndefined(image)){
-      return new Observable(():any => {
-        this.subirImagen(rubro, image);
-      })
+  async preAddAndUpdateRubro(rubro: RubroModel, image: FileI): Promise<any> {
+    if (!isNullOrUndefined(image)) {
+      await this.subirImagen(rubro, image);
     } else {
-      return new Observable(():any => {
-        this.guardarRubro(rubro);
-      });
+      await this.guardarRubro(rubro);
     }
   }
 
@@ -84,8 +79,8 @@ export class PageService {
         map(actions =>
           actions.map(a => {
             const body = a.payload.doc.data() as RubroModel;
-            body.id= a.payload.doc.id;
-            return { ...body };
+            body.id = a.payload.doc.id;
+            return {...body};
           })
         )
       );
@@ -93,10 +88,20 @@ export class PageService {
 
   public eliminarRubroId(rubro: RubroModel): Observable<any> {
     return new Observable((): any => {
-        return this.rubroCollection.doc(rubro.id).delete();
+      this.rubroCollection.doc(rubro.id).delete();
     });
   }
 
-
+  public eliminarRubro(rubro: RubroModel): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.rubroCollection.doc(rubro.id).delete().then((data) => {
+        resolve(data);
+      }, error => {
+        reject(error);
+      }).catch(error => {
+        reject(error);
+      });
+    });
+  }
 
 }

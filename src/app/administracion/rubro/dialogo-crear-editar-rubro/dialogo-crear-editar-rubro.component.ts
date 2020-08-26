@@ -3,13 +3,14 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {EstadoEnum} from "../../../core/models/enums/estadoEnum";
 import {FileI} from "../../../core/models/interfaces/file.interface";
-import { PageService } from 'app/core/services/page.service';
-import { ClicComponent } from 'app/core/utils/clic-component';
-import { Page } from 'app/core/utils/paginator/page';
 import { NotifierService } from 'angular-notifier';
-import { CustomOptions } from 'app/core/dto/custom-options';
-import { RubroModel } from 'app/core/models/rubro.model';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import {PageService} from "../../../core/services/page.service";
+import {RubroModel} from "../../../core/models/rubro.model";
+import {ClicComponent} from "../../../core/utils/clic-component";
+import {Page} from "../../../core/utils/paginator/page";
+import {CustomOptions} from "../../../core/dto/custom-options";
+import {finalize} from "rxjs/operators";
 
 @Component({
   selector: 'app-dialogo-crear-editar-rubro',
@@ -62,6 +63,7 @@ export class DialogoCrearEditarRubroComponent extends ClicComponent implements O
   }
 
   public guardarRubro(): void {
+    this.blockUI.start("Procesando la solicitud...");
     if (this.form.valid) {
       if (this.crear) this.nuevoRubro(); else this.actualizarRubro();
     } else {
@@ -75,26 +77,33 @@ export class DialogoCrearEditarRubroComponent extends ClicComponent implements O
 
   private nuevoRubro(): void {
     const rubro = this.setearValores();
-    this.blockUI.start("Procesando la solicitud...");
-    this.rubroService.preAddAndUpdateRubro(rubro, this.image).subscribe(response =>{
+    this.rubroService.preAddAndUpdateRubro(rubro, this.image).then((data) => {
+      this.dialogRef.close(true);
+      console.log("creado exitoso");
       this.blockUI.stop();
-	  console.log('Esta retoirnando crear');
-	  this.dialogRef.close(true);
     }, error => {
-		this.blockUI.stop();
-		if (error) this.notifierError(error);
-	});
-	this.dialogRef.close(true);
+      console.log(error);
+      if (error) this.notifierError(error);
+      this.blockUI.stop();
+    }).catch( error => {
+      console.log(error);
+      this.blockUI.stop();
+    });
   }
 
   private actualizarRubro(): void {
     const rubro = this.setearValores();
-    this.blockUI.start("Procesando la solicitud...");
-    this.rubroService.preAddAndUpdateRubro(rubro, this.image).subscribe(response => {
+    this.rubroService.preAddAndUpdateRubro(rubro, this.image).then((data) => {
+      this.dialogRef.close(true);
+      console.log("actualizado exitoso");
       this.blockUI.stop();
-	  console.log('Esta retoirnando editar');
+    }, error => {
+      console.log(error);
+      this.blockUI.stop();
+    }).catch( error => {
+      console.log(error);
+      this.blockUI.stop();
     });
-	this.dialogRef.close(true);
   }
 
   private setearValores(): RubroModel {
@@ -133,10 +142,6 @@ export class DialogoCrearEditarRubroComponent extends ClicComponent implements O
     this.files.splice(this.files.indexOf(event), 1);
     this.form.get('imagen')?.setValue(null);
   }
-
-
-
-
 
   notifierError(error: any, type?: string) {
     if (error && error.error) {

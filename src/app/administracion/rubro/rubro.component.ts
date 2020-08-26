@@ -69,12 +69,15 @@ export class RubroComponent extends ClicComponent implements OnInit {
 
   public eliminarRubro(rubro: RubroModel): void {
     this.blockUI.start("eliminado rubro");
-    this.rubroService.eliminarRubroId(rubro).subscribe(() =>{
-
-        this.blockUI.stop();
-    }, error => {
+    this.rubroService.eliminarRubro(rubro).then((response) => {
+      console.log("eliminado exitoso");
       this.blockUI.stop();
-      console.log(error, 'errorCapturado');
+    }, error => {
+      console.log(error);
+      this.blockUI.stop();
+    }).catch( error => {
+      console.log(error);
+      this.blockUI.stop();
     });
   }
 
